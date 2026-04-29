@@ -19,6 +19,39 @@
             font-family: 'Mukta Malar', sans-serif;
             background-color: var(--bg-body);
             color: #333;
+            <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+
+<script>
+  // படி 2-இல் நீங்கள் காப்பி செய்த Config-ஐ இங்கே பேஸ்ட் செய்யவும்
+  const firebaseConfig = {
+    apiKey: "YOUR_API_KEY",
+    databaseURL: "YOUR_DATABASE_URL",
+    projectId: "YOUR_PROJECT_ID",
+    // ... மற்றவை
+  };
+
+  // Firebase-ஐத் தொடங்கவும்
+  firebase.initializeApp(firebaseConfig);
+  const database = firebase.database();
+
+  // செய்திகளைத் திரையில் காட்ட (Fetching News)
+  database.ref('news').on('value', (snapshot) => {
+      const newsContainer = document.getElementById('news-container'); // உங்கள் HTML-இல் இந்த ID இருக்க வேண்டும்
+      newsContainer.innerHTML = ""; 
+      snapshot.forEach((child) => {
+          const val = child.val();
+          newsContainer.innerHTML += `
+              <div class="post">
+                  <img src="${val.image}">
+                  <div class="post-info">
+                      <h2 class="post-title">${val.title}</h2>
+                      <p>${val.content}</p>
+                  </div>
+              </div>`;
+      });
+  });
+</script>
         }
 
         /* Top Header & Ticker */
