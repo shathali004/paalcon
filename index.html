@@ -19,55 +19,8 @@
             font-family: 'Mukta Malar', sans-serif;
             background-color: var(--bg-body);
             color: #333;
-            <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
-
-<script>
-  // படி 2-இல் நீங்கள் காப்பி செய்த Config-ஐ இங்கே பேஸ்ட் செய்யவும்
-  const firebaseConfig = {
-apiKey: "// Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-  apiKey: "AIzaSyChk7hxXvWgr_MplHUqxT4QrPTlwltyuVY",
-  authDomain: "paalcon-news.firebaseapp.com",
-  databaseURL: "https://paalcon-news-default-rtdb.firebaseio.com",
-  projectId: "paalcon-news",
-  storageBucket: "paalcon-news.firebasestorage.app",
-  messagingSenderId: "511182660256",
-  appId: "1:511182660256:web:a72ec493e948d9ce381fc5",
-  measurementId: "G-6546404Y3B"
-};
-
-  // Firebase-ஐத் தொடங்கவும்
-  firebase.initializeApp(firebaseConfig);
-  const database = firebase.database();
-
-  // செய்திகளைத் திரையில் காட்ட (Fetching News)
-  database.ref('news').on('value', (snapshot) => {
-      const newsContainer = document.getElementById('news-container'); // உங்கள் HTML-இல் இந்த ID இருக்க வேண்டும்
-      newsContainer.innerHTML = ""; 
-      snapshot.forEach((child) => {
-          const val = child.val();
-          newsContainer.innerHTML += `
-              <div class="post">
-                  <img src="${val.image}">
-                  <div class="post-info">
-                      <h2 class="post-title">${val.title}</h2>
-                      <p>${val.content}</p>
-                  </div>
-              </div>`;
-      });
-  });
-</script>
         }
 
-        /* Top Header & Ticker */
         .top-bar { background: #000; color: #fff; padding: 10px; display: flex; font-size: 0.9rem; }
         .breaking-tag { background: var(--paalcon-red); padding: 2px 10px; font-weight: bold; margin-right: 10px; }
 
@@ -79,7 +32,6 @@ const firebaseConfig = {
         }
         .logo { font-size: 4rem; color: var(--paalcon-red); font-family: 'Arima', cursive; margin: 0; text-decoration: none; }
 
-        /* Navigation Menu */
         nav {
             background: var(--paalcon-blue);
             position: sticky;
@@ -93,7 +45,6 @@ const firebaseConfig = {
         nav a { color: white; text-decoration: none; padding: 12px 20px; font-weight: bold; white-space: nowrap; }
         nav a:hover { background: rgba(255,255,255,0.1); color: #ffd700; }
 
-        /* Main Layout */
         .wrapper {
             max-width: 1200px;
             margin: 20px auto;
@@ -103,55 +54,29 @@ const firebaseConfig = {
             padding: 0 15px;
         }
 
-        .main-content .post {
+        .post {
             background: white;
             border-radius: 8px;
             overflow: hidden;
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
             margin-bottom: 25px;
         }
-        .post img { width: 100%; height: auto; display: block; }
+        .post img { width: 100%; height: auto; max-height: 400px; object-fit: cover; display: block; }
         .post-info { padding: 20px; }
-        .post-title { font-size: 2rem; color: var(--paalcon-blue); line-height: 1.3; margin: 10px 0; }
+        .post-title { font-size: 1.8rem; color: var(--paalcon-blue); line-height: 1.3; margin: 10px 0; }
 
-        /* WhatsApp Admin Style Button */
         .whatsapp-join {
-            background: #25D366;
-            color: white;
-            text-align: center;
-            padding: 15px;
-            display: block;
-            text-decoration: none;
-            font-weight: bold;
-            border-radius: 5px;
-            margin: 15px 0;
-            font-size: 1.1rem;
+            background: #25D366; color: white; text-align: center; padding: 12px;
+            display: block; text-decoration: none; font-weight: bold; border-radius: 5px; margin-top: 15px;
         }
 
-        /* Sidebar Widgets */
         .sidebar .widget {
-            background: white;
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            border-top: 4px solid var(--paalcon-red);
+            background: white; padding: 15px; border-radius: 8px; margin-bottom: 20px; border-top: 4px solid var(--paalcon-red);
         }
-        .widget h3 { margin-top: 0; border-bottom: 1px solid #eee; padding-bottom: 10px; font-size: 1.2rem; }
-
-        /* Ad Space */
-        .ad-slot {
-            background: #e9ecef;
-            border: 1px dashed #adb5bd;
-            color: #6c757d;
-            text-align: center;
-            padding: 20px;
-            margin: 15px 0;
-            font-size: 0.8rem;
-        }
+        .widget h3 { margin-top: 0; border-bottom: 1px solid #eee; padding-bottom: 10px; }
 
         @media (max-width: 768px) {
             .wrapper { grid-template-columns: 1fr; }
-            .post-title { font-size: 1.5rem; }
         }
     </style>
 </head>
@@ -159,7 +84,7 @@ const firebaseConfig = {
 
 <div class="top-bar">
     <span class="breaking-tag">முக்கிய செய்தி</span>
-    <marquee>Paalcon News: இன்றைய தலைப்புச் செய்திகள் உடனுக்குடன் இங்கே! • தொழில்நுட்பத் துறையில் புதிய மாற்றங்கள்...</marquee>
+    <marquee>Paalcon News: இன்றைய தலைப்புச் செய்திகள் உடனுக்குடன் இங்கே!</marquee>
 </div>
 
 <header>
@@ -173,46 +98,68 @@ const firebaseConfig = {
     <a href="#">இந்தியா</a>
     <a href="#">கல்வி</a>
     <a href="#">வேலைவாய்ப்பு</a>
-    <a href="#">தொழில்நுட்பம்</a>
 </nav>
 
 <div class="wrapper">
-    <main class="main-content">
-        <div class="ad-slot">விளம்பரம் (Header Ad Space)</div>
-
-        <article class="post">
-            <img src="https://images.unsplash.com/photo-1585829365234-781f75534b51?auto=format&fit=crop&w=800&q=80" alt="News Image">
-            <div class="post-info">
-                <span style="background: var(--paalcon-red); color:white; padding: 2px 8px; font-size: 0.8rem; border-radius: 3px;">தொழில்நுட்பம்</span>
-                <h2 class="post-title">ஆண்ட்ராய்டு போன்களில் இனி வாட்ஸ்அப் மாற்றங்கள்: நீங்கள் தெரிந்து கொள்ள வேண்டியவை!</h2>
-                <p>புதிய பாதுகாப்பு அப்டேட் காரணமாக பழைய போன்களில் வாட்ஸ்அப் சேவை நிறுத்தப்படுகிறது. இதன் முழு விவரங்களை இங்கே காணலாம்...</p>
-                
-                <a href="#" class="whatsapp-join">
-                    <i class="fab fa-whatsapp"></i> வாட்ஸ்அப் குழுவில் இணைய இங்கே கிளிக் செய்யவும்
-                </a>
-            </div>
-        </article>
-
-        <div class="ad-slot">விளம்பரம் (Middle Ad Space)</div>
+    <!-- செய்திகள் இங்கே வந்து சேரும் -->
+    <main class="main-content" id="news-container">
+        <p style="text-align: center; padding: 50px;">செய்திகள் ஏற்றப்படுகின்றன...</p>
     </main>
 
     <aside class="sidebar">
         <div class="widget">
             <h3>பிரபலமானவை</h3>
             <ul style="list-style: none; padding: 0;">
-                <li style="padding: 8px 0; border-bottom: 1px solid #eee;">1. தமிழக வேலைவாய்ப்பு செய்திகள்</li>
-                <li style="padding: 8px 0; border-bottom: 1px solid #eee;">2. தங்கம் விலை நிலவரம்</li>
-                <li style="padding: 8px 0;">3. இன்றைய வானிலை அறிக்கை</li>
+                <li style="padding: 8px 0; border-bottom: 1px solid #eee;">தமிழக வேலைவாய்ப்பு செய்திகள்</li>
+                <li style="padding: 8px 0; border-bottom: 1px solid #eee;">தங்கம் விலை நிலவரம்</li>
             </ul>
-        </div>
-
-        <div class="widget" style="background: #fff3f3;">
-            <h3>Paalcon App</h3>
-            <p>செய்திகளை உடனுக்குடன் பெற எங்களது செயலியை பதிவிறக்கவும்.</p>
-            <button style="width: 100%; background: #000; color: white; padding: 10px; border: none; cursor: pointer; border-radius: 4px;">Install Now</button>
         </div>
     </aside>
 </div>
+
+<!-- Firebase Scripts - இவைதான் முக்கியம் -->
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyChk7hxXvWgr_MplHUqxT4QrPTlwltyuVY",
+    authDomain: "paalcon-news.firebaseapp.com",
+    databaseURL: "https://paalcon-news-default-rtdb.firebaseio.com",
+    projectId: "paalcon-news",
+    storageBucket: "paalcon-news.firebasestorage.app",
+    messagingSenderId: "511182660256",
+    appId: "1:511182660256:web:a72ec493e948d9ce381fc5"
+  };
+
+  firebase.initializeApp(firebaseConfig);
+  const database = firebase.database();
+
+  // செய்திகளைத் திரையில் காட்டுதல்
+  database.ref('news').on('value', (snapshot) => {
+      const newsContainer = document.getElementById('news-container');
+      newsContainer.innerHTML = ""; 
+      
+      if(!snapshot.exists()) {
+          newsContainer.innerHTML = "<p style='text-align:center;'>செய்திகள் ஏதும் இல்லை.</p>";
+          return;
+      }
+
+      snapshot.forEach((child) => {
+          const val = child.val();
+          newsContainer.innerHTML = `
+              <div class="post">
+                  <img src="${val.image}" onerror="this.src='https://via.placeholder.com/800x400?text=No+Image'">
+                  <div class="post-info">
+                      <h2 class="post-title">${val.title}</h2>
+                      <p style="color: gray; font-size: 0.8rem;">${val.date || ''}</p>
+                      <p>${val.content}</p>
+                      <a href="#" class="whatsapp-join"><i class="fab fa-whatsapp"></i> வாட்ஸ்அப் குழுவில் இணைய</a>
+                  </div>
+              </div>` + newsContainer.innerHTML; // புதிய செய்தி மேலே வர
+      });
+  });
+</script>
 
 </body>
 </html>
