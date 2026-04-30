@@ -25,9 +25,30 @@
 <script>
   // படி 2-இல் நீங்கள் காப்பி செய்த Config-ஐ இங்கே பேஸ்ட் செய்யவும்
   const firebaseConfig = {
-    apiKey: "YOUR_API_KEY",
+apiKey: "// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyChk7hxXvWgr_MplHUqxT4QrPTlwltyuVY",
+  authDomain: "paalcon-news.firebaseapp.com",
+  databaseURL: "https://paalcon-news-default-rtdb.firebaseio.com",
+  projectId: "paalcon-news",
+  storageBucket: "paalcon-news.firebasestorage.app",
+  messagingSenderId: "511182660256",
+  appId: "1:511182660256:web:a72ec493e948d9ce381fc5",
+  measurementId: "G-6546404Y3B"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);",
     databaseURL: "YOUR_DATABASE_URL",
-    projectId: "YOUR_PROJECT_ID",
+    projectId: "paalcon-news",
     // ... மற்றவை
   };
 
