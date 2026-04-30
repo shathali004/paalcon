@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Paalcon Admin | செய்திகளைப் பதிவிட</title>
+    <!-- Firebase Libraries (Version 8) -->
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
     
@@ -45,34 +46,22 @@
 </div>
 
 <script>
-    // உங்கள் Firebase Config-ஐ இங்கே மாற்றவும்
+    // உங்கள் சுத்தமான Firebase Config விவரங்கள்
     const firebaseConfig = {
-        // Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-  apiKey: "AIzaSyChk7hxXvWgr_MplHUqxT4QrPTlwltyuVY",
-  authDomain: "paalcon-news.firebaseapp.com",
-  databaseURL: "https://paalcon-news-default-rtdb.firebaseio.com",
-  projectId: "paalcon-news",
-  storageBucket: "paalcon-news.firebasestorage.app",
-  messagingSenderId: "511182660256",
-  appId: "1:511182660256:web:a72ec493e948d9ce381fc5",
-  measurementId: "G-6546404Y3B"
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
-   
+        apiKey: "AIzaSyChk7hxXvWgr_MplHUqxT4QrPTlwltyuVY",
+        authDomain: "paalcon-news.firebaseapp.com",
+        databaseURL: "https://paalcon-news-default-rtdb.firebaseio.com",
+        projectId: "paalcon-news",
+        storageBucket: "paalcon-news.firebasestorage.app",
+        messagingSenderId: "511182660256",
+        appId: "1:511182660256:web:a72ec493e948d9ce381fc5",
+        measurementId: "G-6546404Y3B"
     };
 
-    firebase.initializeApp(firebaseConfig);
+    // Firebase-ஐத் தொடங்கவும்
+    if (!firebase.apps.length) {
+        firebase.initializeApp(firebaseConfig);
+    }
     const database = firebase.database();
 
     document.getElementById('adminForm').addEventListener('submit', function(e) {
@@ -84,7 +73,7 @@ const analytics = getAnalytics(app);
         const content = document.getElementById('content').value;
         const timestamp = new Date().toLocaleString('ta-IN');
 
-        // Firebase-க்கு தரவுகளை அனுப்புதல்
+        // Firebase Realtime Database-க்கு செய்தியை அனுப்புதல்
         database.ref('news').push({
             title: title,
             category: category,
@@ -92,6 +81,7 @@ const analytics = getAnalytics(app);
             content: content,
             date: timestamp
         }).then(() => {
+            // வெற்றி பெற்றால் படிவத்தை காலியாக்கி மெசேஜ் காட்டவும்
             document.getElementById('statusMsg').style.display = 'block';
             document.getElementById('adminForm').reset();
             setTimeout(() => { document.getElementById('statusMsg').style.display = 'none'; }, 3000);
@@ -102,4 +92,5 @@ const analytics = getAnalytics(app);
 </script>
 
 </body>
+</html>
 </html>
